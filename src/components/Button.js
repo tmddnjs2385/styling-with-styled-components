@@ -16,11 +16,31 @@ padding-right: 1rem;
 
 /* size */
 
-height: 2.25rem;
-font-size: 1rem;
+${props=>
 
-${
-    props=>{
+    props.size==='large' && css`
+    height: 3rem;
+    font-size: 1.25rem;
+    `
+}
+
+${props=>
+
+props.size==='medium' && css`
+height: 2rem;
+font-size: 1rem;
+`
+}
+
+${props=>
+
+props.size==='small' && css`
+height: 1rem;
+font-size: 0.87rem;
+`
+}
+
+ ${ props=>{
         const color=props.theme.palette[props.color];
         return css`
         background: ${color};
@@ -34,7 +54,8 @@ ${
         }
         `;
     }
-}
+    
+};
 
 &+&{
     margin-left: 1rem;
@@ -43,19 +64,21 @@ ${
 `;
 
 
-const Button=({children, color, ...rest})=>{
+const Button=({children, color, size, ...rest})=>{
 
 
 
     return(
   
-       <StyledButton color={color} {...rest}>{children}</StyledButton>
+       <StyledButton color={color} size={size} {...rest}>{children}</StyledButton>
 
     )
 }
 
 Button.defaultProps={
-    color: 'blue'
+    color: 'blue',
+    height: '10rem'
+
 };
 
 

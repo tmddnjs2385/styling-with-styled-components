@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{useState} from 'react';
 import styled, {ThemeProvider} from 'styled-components';
-import Button from './components/Button.js'
+import Button from './components/Button.js';
+import Dialog from './components/Dialog.js';
+
 // const Circle= styled.div`
 // width: 5rem;
 // height: 5rem;
@@ -36,13 +38,36 @@ padding: 1rem;
 
 
 function App() {
+
+
+  const [dialog, setDialog]=useState(false);
+
+  const onClick=()=>{
+    setDialog(true);
+  }
+
+  const onConfirm=()=>{
+    setDialog(false);
+  }
+
+  const onCancel=()=>{
+    setDialog(false);
+  }
+
+
   return (
     <ThemeProvider theme={{palette}}>
+      <>
     <AppBlock>
-       <Button color='pink'>Button</Button>
-       <Button color='blue'>Button</Button>
-       <Button color='gray'>Button</Button>
+       <Button color='pink' size='large'onClick={onClick}>Delete</Button>
+       <Button color='blue' size='medium'>Button</Button>
+       <Button color='gray' size='small'>Button</Button>
     </AppBlock>
+    <Dialog title='delete' confirmText="확인" cancelText='취소' visible={dialog} onConfirm={onConfirm} onCancel={onCancel}>
+        do u want to delete your Button?? Really?
+        data will go away....
+    </Dialog>
+    </>
     </ThemeProvider>
     
   );
